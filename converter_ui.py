@@ -24,7 +24,11 @@ class ConverterUI(tk.Tk):
         """Create components and layout the UI."""
         #menu
         self.unit, unitchooser = self.load_units(unittype.UnitType, self.update_combobox)
-        self.unit_type = Length
+        self.unit_type = Area
+        # self.unit_type = Length
+        # self.unit_type = Time
+        # self.unit_type = Volume
+        # self.unit_type = Weight
 
         self.leftinput = tk.StringVar()
         self.rightinput = tk.StringVar()
