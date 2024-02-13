@@ -24,8 +24,8 @@ class ConverterUI(tk.Tk):
         """Create components and layout the UI."""
         # menu
         self.unit, unitchooser = self.load_units(unittype.UnitType, self.update_combobox)
-        self.unit_type = Area
-        # self.unit_type = Length
+        # self.unit_type = Area
+        self.unit_type = Length
         # self.unit_type = Time
         # self.unit_type = Volume
         # self.unit_type = Weight
@@ -129,7 +129,14 @@ class ConverterUI(tk.Tk):
 
     def update_combobox(self, *args):
         self.leftchooser['values'] = self.update_unit()
+        self.leftchooser.current(newindex=0)
         self.rightchooser['values'] = self.update_unit()
+        self.rightchooser.current(newindex=0)
+
+    def refresh(self):
+        self.destroy()
+        self.__init__(self.converter)
+
 
     def run(self):
         """start the app, wait for events"""
