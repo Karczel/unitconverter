@@ -4,7 +4,8 @@ from tkinter import ttk, messagebox
 
 import unittype
 from unittype import UnitType
-from converter import*
+from converter import *
+
 
 class ConverterUI(tk.Tk):
     """User Interface for a unit converter.
@@ -19,10 +20,9 @@ class ConverterUI(tk.Tk):
         self.converter = converter
         self.init_components()
 
-
     def init_components(self):
         """Create components and layout the UI."""
-        #menu
+        # menu
         self.unit, unitchooser = self.load_units(unittype.UnitType, self.update_combobox)
         self.unit_type = Area
         # self.unit_type = Length
@@ -36,7 +36,7 @@ class ConverterUI(tk.Tk):
         # left input field
         leftfield = tk.Entry(self, width=20, textvariable=self.leftinput)
         # combobox
-        self.leftunit, self.leftchooser = self.load_units(self.unit_type, self.do_nothing)
+        self.leftunit, self.leftchooser = self.load_units(self.unit_type,self.do_nothing)
         # label '='
         label = tk.Label(self, text="=")
         # right input field
@@ -51,12 +51,12 @@ class ConverterUI(tk.Tk):
         # Enter bind
         leftfield.bind('<Return>', self.convert_handler)
         rightfield.bind('<Return>', self.convert_handler)
-        # unitchooser.bind('<<Combobox>>', self.update_unit)
+        unitchooser.bind('<<Combobox>>', self.update_unit)
 
         # layout
         padding = {'padx': 10, 'pady': 10}
         # position & size the components
-        unitchooser.pack(**padding,anchor=tk.NW)
+        unitchooser.pack(**padding, anchor=tk.NW)
         leftfield.pack(side=tk.LEFT, **padding, expand=True, fill=tk.X)
         self.leftchooser.pack(side=tk.LEFT, **padding, expand=True, fill=tk.X)
         label.pack(side=tk.LEFT, **padding)
@@ -69,16 +69,15 @@ class ConverterUI(tk.Tk):
         """Load units of the requested unittype into the comboboxes."""
         units = self.converter.get_units(unittype)
         selected = tk.StringVar()
-        #put the unit names (strings) in the comboboxes
+        # put the unit names (strings) in the comboboxes
         chooser = ttk.Combobox(self, textvariable=selected, postcommand=function)
-        #and select which unit to display
+        # and select which unit to display
         chooser['values'] = units
         chooser.current(newindex=0)
-        chooser.bind('<<ComboboxSelected>>',function)
+        chooser.bind('<<ComboboxSelected>>', function)
         return selected, chooser
 
-
-    def convert_handler(self,*args):
+    def convert_handler(self, *args):
         """An event handler for conversion actions.
         You should call the unit converter to perform actual conversion.
         """
@@ -99,7 +98,7 @@ class ConverterUI(tk.Tk):
             else:
                 self.converter.set_number(float(self.rightinput.get()))
                 self.converter.set_unit(unit_2)
-                self.leftinput.set(self.converter.convert(unit_1).converter.number)
+                self.leftinput.set(self.converter.convert(unit_1).number)
         except ValueError:
             messagebox.showerror(message="Only number input are accepted")
             # change to red input and clear other, return to black when re-input
@@ -107,28 +106,28 @@ class ConverterUI(tk.Tk):
     def do_nothing(self, *args):
         pass
 
-    def clear_handler(self,*args):
+    def clear_handler(self, *args):
         """clears both input fields"""
         self.leftinput.set("")
         self.rightinput.set("")
 
-    def update_unit(self):
-        if self.unit == "Area":
+    def update_unit(self,*args):
+        if self.unit.get() == "Area":
             self.unit_type = Area
-        elif self.unit == "Temperature":
+        elif self.unit.get() == "Temperature":
             self.unit_type = Temperature
-        elif self.unit == "Time":
+        elif self.unit.get() == "Time":
             self.unit_type = Time
-        elif self.unit == "Volume":
+        elif self.unit.get() == "Volume":
             self.unit_type = Volume
-        elif self.unit == "Weight":
+        elif self.unit.get() == "Weight":
             self.unit_type = Weight
         else:
             self.unit_type = Length
         lst = self.converter.get_units(self.unit_type)
         return lst
 
-    def update_combobox(self,*args):
+    def update_combobox(self, *args):
         self.leftchooser['values'] = self.update_unit()
         self.rightchooser['values'] = self.update_unit()
 

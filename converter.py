@@ -44,15 +44,16 @@ class UnitConverter:
         """
         # convert accordingly to each unit
         # use state/get instance
-        if unit in [i.value for i in self.get_units(Length)]:
-            return LengthConverter(self).convert(unit)
         if unit in [i.value for i in self.get_units(Area)]:
             return AreaConverter(self).convert(unit)
-        if unit in [i.value for i in self.get_units(Temperature)]:
+        elif unit in [i.value for i in self.get_units(Temperature)]:
             return TemperatureConverter(self).convert(unit)
-        if unit in [i.value for i in self.get_units(Time)]:
+        elif unit in [i.value for i in self.get_units(Time)]:
             return TimeConverter(self).convert(unit)
-        if unit in [i.value for i in self.get_units(Volume)]:
+        elif unit in [i.value for i in self.get_units(Volume)]:
             return VolumeConverter(self).convert(unit)
-        if unit in [i.value for i in self.get_units(Weight)]:
+        elif unit in [i.value for i in self.get_units(Weight)]:
             return WeightConverter(self).convert(unit)
+        elif unit in [i.value for i in self.get_units(Length)]:
+            return LengthConverter(self).convert(unit)
+
