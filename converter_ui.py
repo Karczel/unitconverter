@@ -138,7 +138,7 @@ class ConverterUI(tk.Tk):
         self.rightchooser['values'] = self.update_unit()
         self.rightchooser.current(newindex=0)
 
-    def refresh(self):
+    def refresh(self, *args):
         self.destroy()
         self.__init__(self.converter)
 
