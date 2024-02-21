@@ -3,7 +3,6 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 
 import unittype
-from unittype import UnitType
 from converter import *
 
 
@@ -36,7 +35,7 @@ class ConverterUI(tk.Tk):
         # left input field
         self.leftfield = tk.Entry(self, width=20, textvariable=self.leftinput)
         # combobox
-        self.leftunit, self.leftchooser = self.load_units(self.unit_type,self.do_nothing)
+        self.leftunit, self.leftchooser = self.load_units(self.unit_type, self.do_nothing)
         # label '='
         label = tk.Label(self, text="=")
         # right input field
@@ -65,9 +64,9 @@ class ConverterUI(tk.Tk):
         clear_button.pack(side=tk.RIGHT, **padding)
         convert_button.pack(side=tk.RIGHT, **padding)
 
-    def load_units(self, unittype, function):
+    def load_units(self, unit_type, function):
         """Load units of the requested unittype into the comboboxes."""
-        units = self.converter.get_units(unittype)
+        units = self.converter.get_units(unit_type)
         selected = tk.StringVar()
         # put the unit names (strings) in the comboboxes
         chooser = ttk.Combobox(self, textvariable=selected, postcommand=function)
@@ -116,7 +115,7 @@ class ConverterUI(tk.Tk):
         self.leftinput.set("")
         self.rightinput.set("")
 
-    def update_unit(self,*args):
+    def update_unit(self, *args):
         if self.unit.get() == "Area":
             self.unit_type = Area
         elif self.unit.get() == "Temperature":
@@ -141,7 +140,6 @@ class ConverterUI(tk.Tk):
     def refresh(self, *args):
         self.destroy()
         self.__init__(self.converter)
-
 
     def run(self):
         """start the app, wait for events"""

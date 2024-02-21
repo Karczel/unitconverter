@@ -1,4 +1,5 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/qMEHFR7b)
+Disclaimer:This was a Homework assignment in computer programming II, which I make this repository to finish it later after the deadline after the original cloned assignment repository became read-only
+The unittype.py and main.py was provided, but the rest were from scratch
 ## Unit Converter
 
 A Unit Converter using Python Tkinter graphics.
